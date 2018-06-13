@@ -1,0 +1,78 @@
+rect {
+  opacity: 1;
+  fill: none;
+  stroke-width: 1.5;
+  animation-duration: 1s;
+}
+
+@keyframes anim-00 {
+    from { x: 75; y: 75 }
+    to { x: 35; y: 35 }
+}
+
+.logo-rect-00 {
+  /* animation-name: anim-00; */
+}
+
+@keyframes anim-01 {
+    from { y: 75 }
+    to { y: 35 }
+}
+
+.logo-rect-01 {
+  animation-name: anim-01;
+}
+
+@keyframes anim-02 {
+    from { x: -25; y: 75 }
+    to { x: 15; y: 35 }
+}
+
+.logo-rect-02 {
+  /* animation-name: anim-02; */
+}
+
+@keyframes anim-10 {
+    from { x: 75 }
+    to { x: 35 }
+}
+
+.logo-rect-10 {
+  animation-name: anim-10;
+}
+
+@keyframes anim-12 {
+    from { x: -25; }
+    to { x: 15; }
+}
+
+.logo-rect-12 {
+  animation-name: anim-12;
+}
+
+@keyframes anim-20 {
+    from { x: 75; y: -25 }
+    to { x: 35; y: 15 }
+}
+
+.logo-rect-20 {
+  /* animation-name: anim-20; */
+}
+
+@keyframes anim-21 {
+    from { y: -25 }
+    to { y: 15 }
+}
+
+.logo-rect-21 {
+  animation-name: anim-21;
+}
+
+@keyframes anim-22 {
+    from { x: -25; y: -25 }
+    to { x: 15; y: 15 }
+}
+
+.logo-rect-22 {
+  /* animation-name: anim-22; */
+}
