@@ -30,6 +30,7 @@ export const tasks = [
   }
 ];
 
+
 const increments = [5, 10, 20, 25];
 
 setInterval(

@@ -5,37 +5,25 @@ import Article from 'grommet/components/Article';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
 
-import LoginForm from '../components/LoginForm';
-import Logo from '../components/Logo';
 import NavControl from '../components/NavControl';
 
-import { login } from '../actions/session';
 import { pageLoaded } from './utils';
 
 
-class Login extends Component {
+class ViewPuzzles extends Component {
   constructor() {
     super();
-    this._onSubmit = this._onSubmit.bind(this);
   }
 
   componentDidMount() {
-    pageLoaded('Login');
+    pageLoaded('ViewPuzzles');
   }
 
   componentWillUnmount() {
   }
 
-  _onSubmit(fields) {
-    const { dispatch } = this.props;
-    const { router } = this.context;
-    dispatch(login(fields.username, fields.password, () => (
-      router.history.push('/dashboard')
-    )));
-  }
-
   render() {
-    const { session: { error } } = this.props;
+    const { } = this.props;
 
     return (
       <Article primary={true}>
@@ -66,14 +54,6 @@ class Login extends Component {
           >
 
             <span />
-            <LoginForm
-              logo={<Logo />}
-              onSubmit={this._onSubmit}
-              onRegister={() => {}}
-              errors={[error]}
-              usernameType='text'
-            />
-            <span />
 
           </Header>
 
@@ -84,20 +64,20 @@ class Login extends Component {
   }
 }
 
-Login.defaultProps = {
+ViewPuzzles.defaultProps = {
   session: {
     error: undefined
   }
 };
 
-Login.propTypes = {
+ViewPuzzles.propTypes = {
   dispatch: PropTypes.func.isRequired,
   session: PropTypes.shape({
     error: PropTypes.string
   })
 };
 
-Login.contextTypes = {
+ViewPuzzles.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
@@ -105,4 +85,4 @@ const select = state => ({
   session: state.session
 });
 
-export default connect(select)(Login);
+export default connect(select)(ViewPuzzles);

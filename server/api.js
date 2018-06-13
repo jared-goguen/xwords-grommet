@@ -36,4 +36,14 @@ router.delete('/sessions/*', (req, res) => {
   res.json(undefined);
 });
 
+router.get('/puzzle/:id', (req, res) => {
+  getPuzzle(req.params.id).then((result) => {
+    if (!result.task) {
+      res.status(404).end();
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 module.exports = router;
