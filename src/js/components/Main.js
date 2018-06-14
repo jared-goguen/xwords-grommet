@@ -12,6 +12,7 @@ import Login from '../screens/Login';
 import Dashboard from '../screens/Dashboard';
 import Tasks from '../screens/Tasks';
 import Task from '../screens/Task';
+import ViewPuzzles from '../screens/ViewPuzzles';
 import NotFound from '../screens/NotFound';
 
 class Main extends Component {
@@ -50,6 +51,7 @@ class Main extends Component {
               <Route path='/login' component={Login} />
               <Route path='/tasks/:id' component={Task} />
               <Route path='/tasks' component={Tasks} />
+              <Route path='/puzzles' component={ViewPuzzles} />
               <Route path='/*' component={NotFound} />
             </Switch>
           </Split>

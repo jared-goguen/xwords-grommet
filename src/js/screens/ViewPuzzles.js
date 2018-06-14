@@ -6,9 +6,11 @@ import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
 
 import NavControl from '../components/NavControl';
+import PuzzleList from '../components/PuzzleList';
 
 import { pageLoaded } from './utils';
 
+import { loadRecent, unloadRecent } from '../actions/puzzles';
 
 class ViewPuzzles extends Component {
   constructor() {
@@ -17,13 +19,15 @@ class ViewPuzzles extends Component {
 
   componentDidMount() {
     pageLoaded('ViewPuzzles');
+    this.props.dispatch(loadRecent(10));
   }
 
   componentWillUnmount() {
+    this.props.dispatch(unloadRecent());
   }
 
   render() {
-    const { } = this.props;
+    const { puzzles } = this.props;
 
     return (
       <Article primary={true}>
@@ -38,12 +42,8 @@ class ViewPuzzles extends Component {
 
         <Box
           direction='column'
-          align='bottom'
           justify='between'
         >
-
-          <Header />
-          <Header />
 
           <Header
             direction='row'
@@ -53,7 +53,7 @@ class ViewPuzzles extends Component {
             pad={{ horizontal: 'none', between: 'small' }}
           >
 
-            <span />
+          <PuzzleList puzzles={this.props.puzzles} />
 
           </Header>
 
@@ -82,7 +82,8 @@ ViewPuzzles.contextTypes = {
 };
 
 const select = state => ({
-  session: state.session
+  session: state.session,
+  puzzles: state.puzzles
 });
 
 export default connect(select)(ViewPuzzles);

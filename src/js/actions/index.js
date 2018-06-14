@@ -19,3 +19,7 @@ export const TASK_UNLOAD = 'TASK_UNLOAD';
 export const NAV_ACTIVATE = 'NAV_ACTIVATE';
 export const NAV_ENABLE = 'NAV_ENABLE';
 export const NAV_RESPONSIVE = 'NAV_RESPONSIVE';
+
+// Puzzles
+export const LOAD_RECENT = 'LOAD_RECENT';
+export const UNLOAD_RECENT = 'UN LOAD_RECENT';

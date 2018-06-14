@@ -1,0 +1,36 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'dev-server' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.4
+4 verbose run-script [ 'predev-server', 'dev-server', 'postdev-server' ]
+5 info lifecycle xwords-grommet@0.1.0~predev-server: xwords-grommet@0.1.0
+6 silly lifecycle xwords-grommet@0.1.0~predev-server: no script for predev-server, continuing
+7 info lifecycle xwords-grommet@0.1.0~dev-server: xwords-grommet@0.1.0
+8 verbose lifecycle xwords-grommet@0.1.0~dev-server: unsafe-perm in lifecycle true
+9 verbose lifecycle xwords-grommet@0.1.0~dev-server: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\Users\jared\projects\xwords-grommet\node_modules\.bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\nodejs\;C:\Users\jared\AppData\Local\Programs\Python\Python36-32;C:\Users\jared\Desktop\scripts\gtk\bin;C:\Users\jared\Desktop\scripts\;C:\WINDOWS\System32\OpenSSH\;C:\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\Users\jared\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\jared\AppData\Local\Programs\Python\Python36-32\;C:\Users\jared\AppData\Local\Microsoft\WindowsApps;C:\Users\jared\AppData\Roaming\npm;;C:\Users\jared\AppData\Local\Programs\Fiddler;C:\Users\jared\AppData\Local\Microsoft\WindowsApps;C:\Users\jared\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Heroku\bin
+10 verbose lifecycle xwords-grommet@0.1.0~dev-server: CWD: C:\Users\jared\projects\xwords-grommet
+11 silly lifecycle xwords-grommet@0.1.0~dev-server: Args: [ '/d /s /c', 'nodemon ./server/dev' ]
+12 verbose stack Error: kill ENOSYS
+12 verbose stack     at Object.exports._errnoException (util.js:1020:11)
+12 verbose stack     at process.kill (internal/process.js:191:18)
+12 verbose stack     at process.listener (C:\Program Files\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
+12 verbose stack     at emitNone (events.js:91:20)
+12 verbose stack     at process.emit (events.js:185:7)
+12 verbose stack     at processEmit (C:\Program Files\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at processEmit (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:217:44)
+13 verbose cwd C:\Users\jared\projects\xwords-grommet
+14 error Windows_NT 10.0.17134
+15 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev-server"
+16 error node v6.11.4
+17 error npm  v3.10.10
+18 error code ENOSYS
+19 error errno ENOSYS
+20 error syscall kill
+21 error kill ENOSYS
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]
