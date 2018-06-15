@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import Anchor from 'grommet/components/Anchor';
 import TableHeader from 'grommet/components/TableHeader';
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
@@ -8,23 +9,35 @@ import TableRow from 'grommet/components/TableRow';
 class PuzzleList extends Component {
   constructor() {
     super();
+    this.state = {
+      sortAscending: false
+    };
+    this._onSort = this._onSort.bind(this);
+  }
+
+  _onSort(index, ascending) {
+    console.log(index, ascending);
+    this.setState({sortAscending: ascending})
   }
 
   render() {
-    let puzzles = [];
-    for(let i in this.props.puzzles) {
-      puzzles.push(this.props.puzzles[i]);
+    let { puzzles } = this.props;
+
+    if (this.state.sortAscending) {
+      puzzles.reverse();
     }
+
     let rows = puzzles.map((puzzle, i) => {
+      let href = `/puzzle/${puzzle.id}`;
       return(
-        <TableRow key={i}>
-          <td>
-            {puzzle.date}
-          </td>
-          <td>
-            {puzzle.title}
-          </td>
-        </TableRow>
+          <TableRow key={i}>
+              <td>
+                <Anchor href={href} label={puzzle.date} />   
+              </td>     
+              <td>
+                <Anchor href={href} label={puzzle.title} />
+              </td>       
+          </TableRow>
       );
     });
 
@@ -32,8 +45,8 @@ class PuzzleList extends Component {
       <Table>
         <TableHeader labels={['Date', 'Title']}
           sortIndex={0}
-          sortAscending={false}
-          onSort={() => {}} />
+          sortAscending={this.state.sortAscending}
+          onSort={this._onSort} />
         <tbody>
           {rows}
         </tbody>
@@ -44,13 +57,11 @@ class PuzzleList extends Component {
 
 PuzzleList.defaultProps = {};
 
-/*
 PuzzleList.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  puzzles: PropTypes.array.isRequired,
-
+  puzzles: PropTypes.array,
 };
-*/
+
 const select = state => ({
   session: state.session
 });

@@ -27,7 +27,7 @@ class ViewPuzzles extends Component {
   }
 
   render() {
-    const { puzzles } = this.props;
+    const { recent } = this.props;
 
     return (
       <Article primary={true}>
@@ -53,7 +53,7 @@ class ViewPuzzles extends Component {
             pad={{ horizontal: 'none', between: 'small' }}
           >
 
-          <PuzzleList puzzles={this.props.puzzles} />
+          <PuzzleList puzzles={this.props.recent} />
 
           </Header>
 
@@ -74,7 +74,8 @@ ViewPuzzles.propTypes = {
   dispatch: PropTypes.func.isRequired,
   session: PropTypes.shape({
     error: PropTypes.string
-  })
+  }),
+  recent: PropTypes.array
 };
 
 ViewPuzzles.contextTypes = {
@@ -83,7 +84,7 @@ ViewPuzzles.contextTypes = {
 
 const select = state => ({
   session: state.session,
-  puzzles: state.puzzles
+  recent: state.puzzles.recent
 });
 
 export default connect(select)(ViewPuzzles);

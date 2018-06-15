@@ -39,6 +39,12 @@ router.get('/recent/:count', (req, res) => {
   });
 });
 
+router.get('/puzzle/:id', (req, res) => {
+  getPuzzle(req.params.id).then((result) => {
+    res.json(result);
+  });
+});
+
 router.delete('/sessions/*', (req, res) => {
   res.json(undefined);
 });
