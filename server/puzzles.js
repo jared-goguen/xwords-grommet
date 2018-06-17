@@ -155,3 +155,5 @@ export const getPuzzle = (path) => {
     resolve(result[0]);
   });
 };
+
+populatePuzzleDatabase();

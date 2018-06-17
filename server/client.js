@@ -1,6 +1,13 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const url = 'mongodb://localhost:27017';
+let url;
+
+if (process.env.NODE_EVNV === 'production') {
+  url = 'mongodb://<dbuser>:<dbpassword>@ds163680.mlab.com:63680/heroku_wk9qqvxf';
+} else {
+  url = 'mongodb://localhost:27017';
+}
+
 const dbName = 'xwords-grommet';
 
 let clientInstance = null;

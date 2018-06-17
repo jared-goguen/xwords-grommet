@@ -25,7 +25,7 @@ class ViewPuzzles extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(unloadRecent());
+    this.props.dispatch(unloadLatest());
   }
 
   render() {
