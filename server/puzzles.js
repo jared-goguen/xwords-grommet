@@ -109,12 +109,12 @@ const loadFile = (transform) => async (file) => {
 
 const populatePuzzleDatabase = async () => {
   const collection = await getCollection('puzzles');
-  // let reset = collection.remove({});
+  let reset = collection.remove({});
 
   const files = await fs.readdir(root)
   let jsons = await Promise.all(files.map(loadFile(transformDB)));
 
-  // [reset, jsons] = await Promise.all([reset, jsons]);
+  [reset, jsons] = await Promise.all([reset, jsons]);
 
   collection.insertMany(jsons, (err, results) => {
     console.log('err:', err);

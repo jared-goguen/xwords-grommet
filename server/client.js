@@ -1,9 +1,9 @@
-const MongoClient = require('mongodb').MongoClient;
+import MongoClient from 'mongodb'; 
 
 let url;
 
 if (process.env.NODE_ENV === 'production') {
-  url = process.env.MONGODB_URI;
+  url = process.env.MONGODB_URI + '?w=1';
 } else {
   url = 'mongodb://localhost:27017';
 }
