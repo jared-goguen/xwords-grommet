@@ -1,14 +1,14 @@
 import MongoClient from 'mongodb'; 
 
-let url;
+let url, dbName;
 
 if (process.env.NODE_ENV === 'production') {
-  url = process.env.MONGODB_URI + '?w=1';
+  url = process.env.MONGODB_URI;
+  dbName = process.env.MONGODB_URI.split('/').pop()
 } else {
   url = 'mongodb://localhost:27017';
+  dbName = 'xwords-grommet';
 }
-
-const dbName = 'xwords-grommet';
 
 let clientInstance = null;
 let dbInstance = null;
