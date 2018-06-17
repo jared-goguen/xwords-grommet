@@ -109,7 +109,7 @@ const loadFile = (transform) => async (file) => {
 
 const populatePuzzleDatabase = async () => {
   const collection = await getCollection('puzzles');
-  let reset = collection.remove({});
+  // let reset = collection.remove({});
 
   const files = await fs.readdir(root)
   let jsons = Promise.all(files.map(loadFile(transformDB)));
