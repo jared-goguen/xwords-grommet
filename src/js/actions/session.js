@@ -2,6 +2,8 @@ import { SESSION_LOAD, SESSION_LOGIN, SESSION_LOGOUT } from '../actions';
 import { deleteSession, postSession } from '../api/session';
 import { updateHeaders } from '../api/utils';
 
+import { navEnable } from './nav';
+
 const localStorage = window.localStorage;
 
 export function initialize() {
@@ -11,8 +13,10 @@ export function initialize() {
       dispatch({
         type: SESSION_LOAD, payload: { email, name, token }
       });
+      dispatch(navEnable(true));
     } else {
       window.location = '/login';
+      dispatch(navEnable(false));
     }
   };
 }
@@ -33,6 +37,7 @@ export function login(email, password, done) {
             'browsing mode.'
           );
         }
+        dispatch(navEnable(true));
         done();
       })
       .catch(payload => dispatch({
@@ -47,6 +52,7 @@ export function login(email, password, done) {
 
 export function logout(session) {
   return (dispatch) => {
+    dispatch(navEnable(false));
     dispatch({ type: SESSION_LOGOUT });
     deleteSession(session);
     updateHeaders({ Auth: undefined });

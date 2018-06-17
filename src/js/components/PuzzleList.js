@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import Anchor from 'grommet/components/Anchor';
 import TableHeader from 'grommet/components/TableHeader';
@@ -32,10 +33,10 @@ class PuzzleList extends Component {
       return(
         <TableRow key={i}>
           <td>
-            <Anchor href={href} label={puzzle.date} />   
+            <Anchor tag={Link} href={href} label={puzzle.date} />   
           </td>     
           <td>
-            <Anchor href={href} label={puzzle.title} />
+            <Anchor tag={Link} href={href} label={puzzle.title} />
           </td>       
         </TableRow>
       );

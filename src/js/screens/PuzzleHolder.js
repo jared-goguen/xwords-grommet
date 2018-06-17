@@ -77,6 +77,9 @@ PuzzleHolder.defaultProps = {};
 
 PuzzleHolder.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  session: PropTypes.shape({
+    error: PropTypes.string
+  }),
   match: PropTypes.object.isRequired,
 };
 
@@ -85,6 +88,7 @@ PuzzleHolder.contextTypes = {
 };
 
 const select = state => ({
+  session: state.session,
   puzzleLoaded: state.puzzle.puzzleLoaded
 });
 

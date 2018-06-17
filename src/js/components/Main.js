@@ -64,7 +64,7 @@ class Main extends Component {
 Main.defaultProps = {
   nav: {
     active: true, // start with nav active
-    enabled: true, // start with nav disabled
+    enabled: false, // start with nav disabled
     responsive: 'multiple'
   }
 };

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { showErrors } from '../actions/puzzle';
 
+import CheckBox from 'grommet/components/CheckBox';
+
 import Grid from './Grid';
 import Clues from './Clues';
 import ToggleBox from './ToggleBox';
@@ -13,7 +15,6 @@ class Puzzle extends React.Component {
     console.log(event);
     this.props.dispatch(showErrors(event.target.checked));
   }
-
 
   render() {
     return (
@@ -26,12 +27,12 @@ class Puzzle extends React.Component {
             <Grid />
 
             <div className='options-holder'>
-              <ToggleBox
+              <CheckBox
                 id='show-errors'
-                enabledText='errors on'
-                disabledText='errors off'
-                enabled={ this.props.showErrors }
-                onChange={ this.props.setShowErrors }
+                label='show errors'
+                named='show-errors'
+                toggle={true}
+                onChange={ this.setShowErrors }
               />
             </div>
 

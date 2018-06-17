@@ -8,11 +8,10 @@ import { createReducer } from './utils';
 
 const initialState = {
   active: true, // start with nav active
-  enabled: true, // start with nav disabled
+  enabled: false, // start with nav disabled
   responsive: 'multiple',
   items: [
-    { path: '/puzzles', label: 'Puzzles' },
-    { path: '/login', label: 'Login' }
+    { path: '/puzzles', label: 'Puzzles' }
   ]
 };
 

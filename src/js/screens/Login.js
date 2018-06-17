@@ -31,7 +31,7 @@ class Login extends Component {
     const { dispatch } = this.props;
     const { router } = this.context;
     dispatch(login(fields.username, fields.password, () => (
-      router.history.push('/dashboard')
+      router.history.push('/puzzles')
     )));
   }
 
@@ -40,14 +40,6 @@ class Login extends Component {
 
     return (
       <Article primary={true}>
-        <Header
-          direction='row'
-          justify='between'
-          size='small'
-          pad={{ horizontal: 'medium', between: 'small' }}
-        >
-          <NavControl />
-        </Header>
 
         <Box
           direction='column'
