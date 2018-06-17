@@ -78,7 +78,7 @@ if (env === 'production') {
 plugins.push(new webpack.LoaderOptionsPlugin(loaderOptionsConfig));
 
 export default Object.assign({
-  entry: './src/js/index.js',
+  entry: ['babel-polyfill', './src/js/index.js'],
   output: {
     path: path.resolve('./dist'),
     filename: 'index.js',

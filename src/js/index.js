@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { polyfill as promisePolyfill } from 'es6-promise';
+import 'babel-core/register';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
