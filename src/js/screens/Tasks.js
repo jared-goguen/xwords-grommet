@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Anchor from 'grommet/components/Anchor';
@@ -93,7 +94,7 @@ class Tasks extends Component {
         <Header
           direction='row'
           justify='between'
-          size='large'
+          size='small'
           pad={{ horizontal: 'medium', between: 'small' }}
         >
           <NavControl name={getMessage(intl, 'Tasks')} />

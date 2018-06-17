@@ -13,7 +13,7 @@ const parseXMLString = (xml) => new Promise((resolve, reject) => {
   });
 });
 
-const root = 'server/data';
+const root = 'server/json';
 
 const qualifyPath = path => `${root}/${path}`;
 
@@ -35,9 +35,9 @@ const savePuzzle = async (path) => {
   const xml = await response.text();
   const json = await parseXMLString(xml);
   const puzzle = json.Puzzles.Puzzle[0]
-  const collection = await getCollection('puzzles');
-  collection.insert(transformDB(path, puzzle))
   fs.writeFile(qualifyPath(`${path}.json`), JSON.stringify(puzzle));
+  const collection = await getCollection('puzzles');
+  collection.insert(transformDB(path, puzzle));
 };
 
 const _updatePuzzles = async (date) => {
@@ -57,42 +57,64 @@ export const updatePuzzles = () => {
   _updatePuzzles(new Date());
 };
 
-const loadFile = (transform) => async (file) => {
-  let data = await fs.readFile(qualifyPath(file), 'utf-8');
-  return (transform !== undefined) ? transform(file, data) : data;
-};
-
 const transformDB = (path, data) => {
-  const puzzle = JSON.parse(data);
+  const raw = JSON.parse(data);
+  const puzzle = {
+    title: raw.Title[0],
+    date: raw.Date[0],
+    size: {
+      rows: +(raw.Size[0].Rows), 
+      columns: +(raw.Size[0].Cols)
+    },
+    grid: raw.Grid[0].Row,
+    rebuses: raw.RebusEntries ? raw.RebusEntries[0].Rebus : undefined
+  };
+
+  puzzle.clues = [];
+  for (let rawClue of raw.Clues[0].Clue) {
+    let clue = {};
+    clue.text = rawClue._;
+    clue.row = +(rawClue.$.Row) - 1;
+    clue.column = +(rawClue.$.Col) - 1;
+    clue.direction = rawClue.$.Dir;
+    clue.number = rawClue.$.Num;
+    clue.answer = rawClue.$.Ans;
+    puzzle.clues.push(clue);
+  }
+
+  puzzle.answers = puzzle.grid.map(row => row.split(''));
+
+  puzzle.default = puzzle.answers.map(row => row.map(
+    answer => (answer !== '.' ? '' : null)
+  ));
+
+  puzzle.adjacency = puzzle.answers.map(row => row.map(
+    cell => (true ? cell !== '.' : false)
+  ));
+
+  puzzle.clueMarkers = [ ...Array(puzzle.size.rows) ].map(u => []);
+  for (let clue of puzzle.clues) {
+    let { row, column, number } = clue;
+    puzzle.clueMarkers[row][column] = number;
+  }
+
   return { path, puzzle };
 };
 
-const displayEntry = (entry) => {
-  return {
-    title: entry.puzzle.Title[0],
-    date: entry.puzzle.Date[0], 
-    path: entry.path
-  };
-};
-
-const entryCompare = ({ pathA, puzzleA }, { pathB, puzzleB }) => {
-  const dateA = unqualifyDate(pathA);
-  const dateB = unqualifyDate(pathB);
-  return dateB - dateA;
-};
-
-export const mostRecentPuzzles = async (count) => {
-  const collection = await getCollection('puzzles');
-  const entries = await collection.find({}).toArray();
-  entries.sort(entryCompare);
-  const recent = entries.slice(0, count);
-  return recent.map(displayEntry);
+const loadFile = (transform) => async (file) => {
+  let data = await fs.readFile(qualifyPath(file), 'utf-8');
+  let path = file.split('.')[0]
+  return (transform !== undefined) ? transform(path, data) : data;
 };
 
 const populatePuzzleDatabase = async () => {
   const collection = await getCollection('puzzles');
-  const files = await fs.readdir('data')
-  const jsons = await Promise.all(files.map(loadFile(transformDB)));
+  let reset = collection.remove({});
+
+  const files = await fs.readdir(root)
+  let jsons = Promise.all(files.map(loadFile(transformDB)));
+
+  [reset, jsons] = await Promise.all([reset, jsons]);
 
   collection.insertMany(jsons, (err, results) => {
     console.log('err:', err);
@@ -100,15 +122,36 @@ const populatePuzzleDatabase = async () => {
   });
 };
 
-export const getPuzzle = async (path) => {
-  const collection = await getCollection('puzzles');
-  return collection.find({path});
+
+const displayEntry = (entry) => {
+  return { 
+    title: entry.puzzle.title,
+    date: entry.puzzle.date, 
+    path: entry.path
+  };
 };
 
-const f = async () => {
-  let p = await getPuzzle('Apr01-2018');
-  console.log(p);  
-}
+const entryCompare = (entryA, entryB) => {
+  const dateA = unqualifyDate(entryA.path);
+  const dateB = unqualifyDate(entryB.path);
+  return dateB - dateA;
+};
 
-f();
+export const latestPuzzles = async (count) => {
+  const collection = await getCollection('puzzles');
+  const entries = await collection.find({}).toArray();
+  entries.sort(entryCompare);
+  const recent = entries.slice(0, count);
+  return recent.map(displayEntry);
+};
 
+export const getPuzzle = (path) => {
+  return new Promise(async (resolve, reject) => {
+    const collection = await getCollection('puzzles');
+    let result = await collection.find({path}).toArray();
+    if (result.length === 0) {
+      reject(result);
+    }
+    resolve(result[0]);
+  });
+};

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Sidebar from 'grommet/components/Sidebar';
@@ -33,7 +34,7 @@ class NavSidebar extends Component {
 
     return (
       <Sidebar colorIndex='neutral-3' fixed={true}>
-        <Header size='large' justify='between' pad={{ horizontal: 'medium' }}>
+        <Header size='small' justify='between' pad={{ horizontal: 'medium' }}>
           <Title onClick={this._onClose} a11yTitle='Close Menu'>
             <Logo />
             <span>x-words</span>

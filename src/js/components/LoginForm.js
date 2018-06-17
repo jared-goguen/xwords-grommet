@@ -288,7 +288,7 @@ var LoginForm = function (_Component) {
             onClick: onSubmit ? this._onSubmit : undefined }),
           forgotPassword,
           _react2.default.createElement(_Button2.default, { primary: false, fill: center,
-            type: onRegister ? "register" : "button",
+            type: "button",
             label: register,
             onClick: onRegister ? this._onRegister : undefined })
         )

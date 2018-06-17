@@ -4,12 +4,12 @@ import dashboard from './dashboard';
 import nav from './nav';
 import session from './session';
 import tasks from './tasks';
-import puzzles from './puzzles';
+import puzzle from './puzzle';
 
 export default combineReducers({
   dashboard,
   nav,
   session,
   tasks,
-  puzzles
+  puzzle
 });

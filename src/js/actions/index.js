@@ -21,5 +21,17 @@ export const NAV_ENABLE = 'NAV_ENABLE';
 export const NAV_RESPONSIVE = 'NAV_RESPONSIVE';
 
 // Puzzles
-export const LOAD_RECENT = 'LOAD_RECENT';
-export const UNLOAD_RECENT = 'UN LOAD_RECENT';
+export const LOAD_LATEST = 'LOAD_LATEST';
+export const UNLOAD_LATEST = 'UNLOAD_LATEST';
+export const LOAD_PUZZLE = 'LOAD_PUZZLE';
+export const UNLOAD_PUZZLE = 'UNLOAD_PUZZLE';
+export const SET_ACTIVE = 'SET_ACTIVE';
+export const UNSET_ACTIVE = 'UNSET_ACTIVE';
+export const SET_ENTRY = 'SET_ENTRY';
+export const FOCUS_CLUE = 'FOCUS_CLUE';
+export const FOCUS_CELL = 'FOCUS_CLUE';
+export const TOGGLE_DIRECTION = 'TOGGLE_DIRECTION';
+export const NEXT_CELL = 'NEXT_CELL';
+export const PREVIOUS_CELL = 'PREVIOUS_CELL';
+export const MOVE_CELL = 'MOVE_CELL';
+export const SHOW_ERRORS = 'SHOW_ERRORS';

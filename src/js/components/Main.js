@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -13,6 +14,7 @@ import Dashboard from '../screens/Dashboard';
 import Tasks from '../screens/Tasks';
 import Task from '../screens/Task';
 import ViewPuzzles from '../screens/ViewPuzzles';
+import PuzzleHolder from '../screens/PuzzleHolder';
 import NotFound from '../screens/NotFound';
 
 class Main extends Component {
@@ -46,12 +48,10 @@ class Main extends Component {
           >
             {nav}
             <Switch>
-              <Route exact={true} path='/' component={Dashboard} />
-              <Route path='/dashboard' component={Dashboard} />
+              <Route exact={true} path='/' component={ViewPuzzles} />
               <Route path='/login' component={Login} />
-              <Route path='/tasks/:id' component={Task} />
-              <Route path='/tasks' component={Tasks} />
               <Route path='/puzzles' component={ViewPuzzles} />
+              <Route path='/puzzle/:path' component={PuzzleHolder} />
               <Route path='/*' component={NotFound} />
             </Switch>
           </Split>

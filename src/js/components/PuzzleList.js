@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Anchor from 'grommet/components/Anchor';
@@ -10,34 +11,33 @@ class PuzzleList extends Component {
   constructor() {
     super();
     this.state = {
-      sortAscending: false
+      sortAscending: true
     };
     this._onSort = this._onSort.bind(this);
   }
 
   _onSort(index, ascending) {
-    console.log(index, ascending);
     this.setState({sortAscending: ascending})
   }
 
   render() {
-    let { puzzles } = this.props;
+    let { latest } = this.props;
 
-    if (this.state.sortAscending) {
-      puzzles.reverse();
+    if (!this.state.sortAscending) {
+      latest = latest.slice().reverse();
     }
 
-    let rows = puzzles.map((puzzle, i) => {
-      let href = `/puzzle/${puzzle.id}`;
+    let rows = latest.map((puzzle, i) => {
+      let href = `/puzzle/${puzzle.path}`;
       return(
-          <TableRow key={i}>
-              <td>
-                <Anchor href={href} label={puzzle.date} />   
-              </td>     
-              <td>
-                <Anchor href={href} label={puzzle.title} />
-              </td>       
-          </TableRow>
+        <TableRow key={i}>
+          <td>
+            <Anchor href={href} label={puzzle.date} />   
+          </td>     
+          <td>
+            <Anchor href={href} label={puzzle.title} />
+          </td>       
+        </TableRow>
       );
     });
 
@@ -59,7 +59,7 @@ PuzzleList.defaultProps = {};
 
 PuzzleList.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  puzzles: PropTypes.array,
+  latest: PropTypes.array,
 };
 
 const select = state => ({

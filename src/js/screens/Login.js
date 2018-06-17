@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Article from 'grommet/components/Article';
@@ -42,7 +43,7 @@ class Login extends Component {
         <Header
           direction='row'
           justify='between'
-          size='large'
+          size='small'
           pad={{ horizontal: 'medium', between: 'small' }}
         >
           <NavControl />
@@ -50,7 +51,6 @@ class Login extends Component {
 
         <Box
           direction='column'
-          align='bottom'
           justify='between'
         >
 

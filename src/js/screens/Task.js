@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Anchor from 'grommet/components/Anchor';
@@ -80,7 +81,7 @@ class Task extends Component {
       <Article primary={true} full={true}>
         <Header
           direction='row'
-          size='large'
+          size='small'
           colorIndex='light-2'
           align='center'
           responsive={false}

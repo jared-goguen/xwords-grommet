@@ -1,3 +1,4 @@
 module.exports = {
-  Tasks: 'Tasks'
+  Tasks: 'Tasks',
+  Register: 'Register'
 };

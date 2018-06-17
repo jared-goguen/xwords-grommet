@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import api from './api';
 import { addNotifier, getTasks, getTask } from './data';
-import { mostRecentPuzzles } from './puzzles';
+import { latestPuzzles } from './puzzles';
 import Notifier from './notifier';
 
 const PORT = process.env.PORT || 8102;
@@ -38,8 +38,8 @@ notifier.use('/api/task/:id', param => (
   })
 ));
 
-notifier.use('/api/recent/:count', param => (
-  mostRecentPuzzles(param.count).then((results) => {
+notifier.use('/api/latest/:count', param => (
+  latestPuzzles(param.count).then((results) => {
     return Promise.resolve(results);
   })
 ));

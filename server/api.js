@@ -1,6 +1,6 @@
 import express from 'express';
 import { addSession, getTasks, getTask } from './data';
-import { mostRecentPuzzles } from './puzzles';
+import { latestPuzzles, getPuzzle } from './puzzles';
 
 const router = express.Router();
 
@@ -33,14 +33,14 @@ router.get('/task/:id', (req, res) => {
   });
 });
 
-router.get('/recent/:count', (req, res) => {
-  mostRecentPuzzles(req.params.count).then((results) => {
+router.get('/latest/:count', (req, res) => {
+  latestPuzzles(req.params.count).then((results) => {
     res.json({puzzles: results});
   });
 });
 
-router.get('/puzzle/:id', (req, res) => {
-  getPuzzle(req.params.id).then((result) => {
+router.get('/puzzle/:path', (req, res) => {
+  getPuzzle(req.params.path).then((result) => {
     res.json(result);
   });
 });

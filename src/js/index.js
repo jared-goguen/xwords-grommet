@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 
 import '../scss/index.scss';
 import '../scss/logo.scss';
+import '../scss/puzzle.scss';
 
 import App from './App';
 

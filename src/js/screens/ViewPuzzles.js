@@ -1,16 +1,18 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Article from 'grommet/components/Article';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
+import Spinning from 'grommet/components/icons/Spinning';
 
 import NavControl from '../components/NavControl';
 import PuzzleList from '../components/PuzzleList';
 
 import { pageLoaded } from './utils';
 
-import { loadRecent, unloadRecent } from '../actions/puzzles';
+import { loadLatest, unloadLatest } from '../actions/puzzle';
 
 class ViewPuzzles extends Component {
   constructor() {
@@ -19,7 +21,7 @@ class ViewPuzzles extends Component {
 
   componentDidMount() {
     pageLoaded('ViewPuzzles');
-    this.props.dispatch(loadRecent(10));
+    this.props.dispatch(loadLatest(10));
   }
 
   componentWillUnmount() {
@@ -27,14 +29,27 @@ class ViewPuzzles extends Component {
   }
 
   render() {
-    const { recent } = this.props;
+    let content;
+    if (this.props.latest.length !== 0) {
+      content = <PuzzleList latest={this.props.latest} />
+    } else {
+      content = (
+        <Box
+          direction='row'
+          responsive={false}
+          pad={{ between: 'small', horizontal: 'medium', vertical: 'medium' }}
+        >
+          <Spinning /><span>Loading...</span>
+        </Box>
+      );
+    }
 
     return (
       <Article primary={true}>
         <Header
           direction='row'
           justify='between'
-          size='large'
+          size='small'
           pad={{ horizontal: 'medium', between: 'small' }}
         >
           <NavControl />
@@ -53,7 +68,7 @@ class ViewPuzzles extends Component {
             pad={{ horizontal: 'none', between: 'small' }}
           >
 
-          <PuzzleList puzzles={this.props.recent} />
+            {content}
 
           </Header>
 
@@ -75,7 +90,7 @@ ViewPuzzles.propTypes = {
   session: PropTypes.shape({
     error: PropTypes.string
   }),
-  recent: PropTypes.array
+  latest: PropTypes.array
 };
 
 ViewPuzzles.contextTypes = {
@@ -84,7 +99,7 @@ ViewPuzzles.contextTypes = {
 
 const select = state => ({
   session: state.session,
-  recent: state.puzzles.recent
+  latest: state.puzzle.latest
 });
 
 export default connect(select)(ViewPuzzles);
