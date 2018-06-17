@@ -3,7 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 let url;
 
 if (process.env.NODE_EVNV === 'production') {
-  url = 'mongodb://<dbuser>:<dbpassword>@ds163680.mlab.com:63680/heroku_wk9qqvxf';
+  url = 'mongodb://admin:password1@ds163680.mlab.com:63680/heroku_wk9qqvxf';
 } else {
   url = 'mongodb://localhost:27017';
 }
