@@ -1,0 +1,269 @@
+$blank: #333333;
+$background: #FFFFFF;
+$active: #02FFBF;
+$adjacent: #94FFE4;
+$error: #FF547B;
+$error-dark: #FF305F;
+$error-light: #FFB2C3;
+$error-active: #C498F9;
+$error-highlight: #E0B2FF;
+$light: #F3F3F3;
+$cell-size: 28px;
+
+
+/*  outside container */
+
+.puzzle-holder {
+  position: relative !important;
+  display: flex !important;
+  padding-top: 20px;
+}
+
+
+
+/* grid container */
+
+.grid-flex {
+  display: inline-flex !important;
+  flex: none !important;
+}
+
+.grid-holder {
+  display: inline-block !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  float: left !important;
+  height: fit-content !important;
+
+  table {
+    -webkit-border-horizontal-spacing: 0 !important;
+    -webkit-border-vertical-spacing: 0 !important;
+    table-layout: fixed !important;
+  }
+}
+
+.grid-body {
+  tr {
+    &:first-child td {
+      border-top: 1px solid $blank !important;
+    }
+
+    td {
+      width: $cell-size !important;
+
+      &:first-child {
+        border-left: 1px solid $blank !important;
+      }
+
+      div {
+        position: relative !important;
+      }
+    }
+  }
+}
+
+.blank {
+  background: $blank !important;
+}
+
+.cell {
+  border-right: 1px solid $blank !important;
+  border-bottom: 1px solid $blank !important;
+  padding: 0 !important;
+}
+
+.cell-input {
+  height: $cell-size !important;
+  padding-bottom: 2px !important;
+  padding-top: 8px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border: 0 !important;
+  width: 100% !important;
+  background: $background !important;
+  text-align: center !important;
+  font-size: 20px !important;
+  cursor: default !important;
+  text-transform: uppercase !important;
+  border-radius: 0px !important;
+
+
+  &.cell-highlight {
+    background: $active !important;
+  }
+
+  &.cell-active {
+    background: $adjacent !important;
+  }
+
+  &.cell-error {
+    background: $error !important;
+
+    &.cell-active {
+      background: $error-light !important;
+    }
+
+    &.cell-highlight {
+      background: $error-highlight !important;
+    }
+  }
+}
+
+.clue-label {
+  position: absolute !important;
+  top: 2px !important;
+  left: 2px !important;
+  font-size: 9px !important;
+  color: $blank !important;
+}
+
+
+
+/* options container */
+
+.options-holder {
+  display: block !important;
+  margin-top: 25px !important;
+  margin-bottom: 5px !important;
+}
+
+.toggle-box {
+  margin-right: 20px !important;
+
+  input {
+    display: none !important;
+  }
+
+  label {
+    padding: 10px !important;
+    border-radius: 5px !important;
+    color: $light !important;
+  }
+}
+
+.toggle-box-enabled label {
+  background: $error !important;
+}
+
+.toggle-box-disabled label {
+  color: $blank !important;
+  background: $active !important;
+}
+
+
+
+/* clues container */
+
+.clues-holder {
+  div {
+    float: left !important;
+  }
+}
+
+.clue-holder {
+  font-size: 15px !important;
+  border-bottom: 1px solid $error !important;
+  padding-bottom: 3px !important;
+
+  h3 {
+    border-bottom: 1px solid $error !important;
+    text-align: center !important;
+    margin-top: 0 !important;
+  }
+
+  ol {
+    max-height: 24em !important;
+    overflow-y: auto !important;
+    padding-left: 10px !important;
+
+    li {
+      list-style: none !important;
+
+      label {
+        clear: left !important;
+        margin-left: 2.5em !important;
+        display: block !important;
+        padding: 0.25em !important;
+
+        b {
+          float: left !important;
+          text-align: right !important;
+          margin-left: -2.5em !important;
+          width: 2em !important;
+        }
+      }
+    }
+  }
+}
+
+
+.clue-highlight {
+  background: $active !important;
+  color: $blank !important;
+}
+
+.clue-holder ol::-webkit-scrollbar {
+    width: 1em !important;
+}
+
+.clue-holder ol::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px $active !important;
+}
+
+.clue-holder ol::-webkit-scrollbar-thumb {
+  background-color: $adjacent !important;
+}
+
+
+@media only screen and (min-width : 1200px) {
+  .clues-holder {
+    display: inline-flex !important;
+    border: 1px solid $blank !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    margin-left: 10px !important;
+    max-width: 30em !important;
+  }
+
+}
+
+@media only screen and (max-width : 1200px) {
+  .puzzle-holder {
+    display: inline-block !important;
+  }
+
+  .grid-flex {
+    display: block !important;
+    margin-top: 2.5em !important;
+  }
+
+  .clues-holder {
+    display: flex !important;
+  }
+
+  .clue-holder {
+    border-bottom: none !important;
+
+    ol li {
+      display: none !important;
+    }
+
+    h3 {
+      display: none !important;
+    }
+  }
+
+  .clue-highlight {
+    display: block !important !important;
+    background: unset !important;
+    padding-left: 0 !important;
+    width: 100% !important;
+    position: absolute !important;
+    top:  0 !important;
+    left: 0 !important;
+    border: 2px solid $active !important;
+    border-radius: 10px !important;
+    color: $blank !important;
+    margin-bottom: 0.5em !important;
+  }
+}
