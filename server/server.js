@@ -1,3 +1,6 @@
+import 'babel-polyfill';
+import 'babel-core/register';
+
 import compression from 'compression';
 import express from 'express';
 import http from 'http';
