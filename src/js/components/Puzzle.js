@@ -30,13 +30,15 @@ class Puzzle extends React.Component {
     } else {
       sizeClass = 'big-puzzle'; 
     }
-    await this.setState({ sizeClass });
+
+    if ( sizeClass !== this.state.sizeClass ) {
+      await this.setState({ sizeClass });
+    }
 
     const outerWidth = this.flexHolder.current.offsetWidth;
     const innerWidth = this.gridHolder.current.offsetWidth;
     const marginRight = (outerWidth - innerWidth) / 2 - 15;
     this.setState({ marginRight });
-
   }
 
   componentDidMount() {
