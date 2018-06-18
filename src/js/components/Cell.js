@@ -39,7 +39,7 @@ class Cell extends React.Component {
   }
 
   onBackspacePress = () => {
-    this.setEntry('');
+    this.updateEntry('');
     this.props.dispatch(previousCell());
   }
 
