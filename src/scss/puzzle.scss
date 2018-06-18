@@ -8,7 +8,7 @@ $error-light: #FFB2C3;
 $error-active: #C498F9;
 $error-highlight: #E0B2FF;
 $light: #F3F3F3;
-$cell-size: 28px;
+$cell-size: 33px;
 
 
 /*  outside container */
@@ -17,6 +17,7 @@ $cell-size: 28px;
   position: relative !important;
   display: flex !important;
   padding-top: 20px;
+  width: 100%;
 }
 
 
@@ -30,9 +31,7 @@ $cell-size: 28px;
 
 .grid-holder {
   display: inline-block !important;
-  padding-left: 15px !important;
-  padding-right: 15px !important;
-  float: left !important;
+  margin-left: 15px !important;
   height: fit-content !important;
 
   table {
@@ -74,8 +73,6 @@ $cell-size: 28px;
 
 .cell-input {
   height: $cell-size !important;
-  padding-bottom: 2px !important;
-  padding-top: 8px !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
   border: 0 !important;
@@ -156,12 +153,12 @@ $cell-size: 28px;
 
 .clues-holder {
   div {
-    float: left !important;
+    width: 100%;
   }
 }
 
 .clue-holder {
-  font-size: 15px !important;
+  font-size: 11px !important;
   border-bottom: 1px solid $error !important;
   padding-bottom: 3px !important;
 
@@ -172,12 +169,14 @@ $cell-size: 28px;
   }
 
   ol {
-    max-height: 24em !important;
+    max-height: 20em !important;
     overflow-y: auto !important;
-    padding-left: 10px !important;
+    margin: 0;
 
     li {
       list-style: none !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
 
       label {
         clear: left !important;
@@ -215,37 +214,63 @@ $cell-size: 28px;
 }
 
 
-@media only screen and (min-width : 1200px) {
+.big-puzzle {
   .clues-holder {
     display: inline-flex !important;
     border: 1px solid $blank !important;
     padding: 10px !important;
     border-radius: 10px !important;
-    margin-left: 10px !important;
     max-width: 30em !important;
-  }
-
-}
-
-@media only screen and (max-width : 1200px) {
-  .puzzle-holder {
-    display: inline-block !important;
+    position: absolute !important;
+    right: 0 !important;
+    left: 65% !important;
+    margin-right: 15px !important;
   }
 
   .grid-flex {
     display: block !important;
-    margin-top: 2.5em !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 35% !important;
+  }
+
+  .grid-holder {
+    float: right !important;
+    margin-right: 3em;
+  }
+
+}
+
+.small-puzzle {
+  .puzzle-holder {
+    display: inline-block !important;
+    width: fit-content;
+  }
+
+  .grid-flex {
+    display: block !important;
   }
 
   .clues-holder {
     display: flex !important;
+
+    > div {
+      margin-left: 15px !important;
+      width: unset;
+      width: 100% !important;
+    }
   }
 
   .clue-holder {
     border-bottom: none !important;
 
-    ol li {
-      display: none !important;
+    ol {
+      padding: 0 !important;
+
+      li {
+        display: none;
+        max-width: unset !important;
+      }
     }
 
     h3 {
@@ -254,16 +279,13 @@ $cell-size: 28px;
   }
 
   .clue-highlight {
-    display: block !important !important;
+    display: block !important;
     background: unset !important;
     padding-left: 0 !important;
     width: 100% !important;
-    position: absolute !important;
-    top:  0 !important;
-    left: 0 !important;
     border: 2px solid $active !important;
     border-radius: 10px !important;
     color: $blank !important;
-    margin-bottom: 0.5em !important;
+    margin-bottom: 0.5em;
   }
 }

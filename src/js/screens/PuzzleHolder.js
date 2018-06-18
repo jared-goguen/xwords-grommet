@@ -46,28 +46,9 @@ class PuzzleHolder extends Component {
     }
 
     return (
-      <Article primary={true}>
+      <Article primary={true} style={{height: '100%'}}>
         <NavHeader />
-        
-        <Box
-          direction='column'
-          justify='between'
-        >
-
-          <Header
-            direction='row'
-            align='center'
-            justify='between'
-            size='large'
-            pad={{ horizontal: 'none', between: 'small' }}
-          >
-
-            {content}
-
-          </Header>
-
-        </Box>
-
+        {content}
       </Article>
     );
   }

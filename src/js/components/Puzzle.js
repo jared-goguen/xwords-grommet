@@ -11,37 +11,76 @@ import ToggleBox from './ToggleBox';
 
 
 class Puzzle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.flexHolder = React.createRef();
+    this.gridHolder = React.createRef();
+    this.puzzleHolder = React.createRef();
+    this.state = {sizeClass: 'small-puzzle', marginRight: 0};
+  }
+
   setShowErrors = (event) => {
-    console.log(event);
     this.props.dispatch(showErrors(event.target.checked));
   }
 
+  updateSizeClass = () => {
+
+    this.setState({ sizeClass });
+  }
+
+  updateDimensionState = () => {
+    const outerWidth = this.flexHolder.current.offsetWidth;
+    const innerWidth = this.gridHolder.current.offsetWidth;
+    const marginRight = (outerWidth - innerWidth) / 2 - 15;
+    let sizeClass;
+    if (this.puzzleHolder.current.offsetWidth < 800) {
+      sizeClass = 'small-puzzle'; 
+    } else {
+      sizeClass = 'big-puzzle'; 
+    }
+    this.setState({ marginRight, sizeClass });
+  }
+
+  componentDidMount() {
+    this.updateDimensionState()
+    window.addEventListener('resize', this.updateDimensionState);
+  }
+
+  componentWillUnmount() {
+     window.addEventListener('resize', this.updateDimensionState);
+  }
+
   render() {
+    const style = {marginRight: this.state.marginRight}
     return (
-      <div className='puzzle-holder'>
+      <div className={this.state.sizeClass} ref={this.puzzleHolder}>
+      
+        <div className={'puzzle-holder'}>
 
-        <div className='grid-flex'>
+          <div className='clues-holder'>
+            <Clues />
+          </div>
 
-          <div className='grid-holder'>
-          
-            <Grid />
+          <div className='grid-flex' ref={this.flexHolder}>
 
-            <div className='options-holder'>
-              <CheckBox
-                id='show-errors'
-                label='show errors'
-                named='show-errors'
-                toggle={true}
-                onChange={ this.setShowErrors }
-              />
+            <div className='grid-holder' ref={this.gridHolder} style={style}>
+            
+              <Grid />
+
+              <div className='options-holder'>
+                <CheckBox
+                  id='show-errors'
+                  label='show errors'
+                  named='show-errors'
+                  toggle={true}
+                  onChange={ this.setShowErrors }
+                />
+              </div>
+
             </div>
 
           </div>
 
-        </div>
-
-        <div className='clues-holder'>
-          <Clues />
         </div>
 
       </div>
