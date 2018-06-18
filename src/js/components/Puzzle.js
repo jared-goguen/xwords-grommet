@@ -23,22 +23,20 @@ class Puzzle extends React.Component {
     this.props.dispatch(showErrors(event.target.checked));
   }
 
-  updateSizeClass = () => {
-
-    this.setState({ sizeClass });
-  }
-
-  updateDimensionState = () => {
-    const outerWidth = this.flexHolder.current.offsetWidth;
-    const innerWidth = this.gridHolder.current.offsetWidth;
-    const marginRight = (outerWidth - innerWidth) / 2 - 15;
+  updateDimensionState = async () => {
     let sizeClass;
     if (this.puzzleHolder.current.offsetWidth < 800) {
       sizeClass = 'small-puzzle'; 
     } else {
       sizeClass = 'big-puzzle'; 
     }
-    this.setState({ marginRight, sizeClass });
+    await this.setState({ sizeClass });
+
+    const outerWidth = this.flexHolder.current.offsetWidth;
+    const innerWidth = this.gridHolder.current.offsetWidth;
+    const marginRight = (outerWidth - innerWidth) / 2 - 15;
+    this.setState({ marginRight });
+
   }
 
   componentDidMount() {
