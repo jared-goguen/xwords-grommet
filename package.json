@@ -11,7 +11,6 @@
     "dev-server": "nodemon ./server/dev",
     "dev": "cross-env NODE_ENV=development grommet pack",
     "dist": "cross-env NODE_ENV=production grommet pack",
-    "predist-server": "node ./server/hooks",
     "dist-server": "babel -d ./dist-server ./server -s",
     "start": "npm run dist-server && npm run dist && node ./dist-server/server.js"
   },
