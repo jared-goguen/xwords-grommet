@@ -98,6 +98,8 @@ const transformDB = (path, data) => {
     puzzle.clueMarkers[row][column] = number;
   }
 
+  puzzle.dayType = (puzzle.size.rows < 18) ? 'weekday' : 'sunday';
+
   return { path, puzzle };
 };
 

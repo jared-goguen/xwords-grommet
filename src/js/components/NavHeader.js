@@ -18,7 +18,7 @@ class NavHeader extends React.Component {
           size='small'
           pad={{ horizontal: 'medium', between: 'small' }}
         >
-          <NavControl />
+          <NavControl name={this.props.name}/>
         </Header>
       );
     } else {

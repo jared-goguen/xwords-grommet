@@ -9,6 +9,7 @@ $error-active: #C498F9;
 $error-highlight: #E0B2FF;
 $light: #F3F3F3;
 $cell-size: 33px;
+$cell-size-small: 29px;
 
 
 /*  outside container */
@@ -48,8 +49,6 @@ $cell-size: 33px;
     }
 
     td {
-      width: $cell-size !important;
-
       &:first-child {
         border-left: 1px solid $blank !important;
       }
@@ -72,14 +71,12 @@ $cell-size: 33px;
 }
 
 .cell-input {
-  height: $cell-size !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
   border: 0 !important;
   width: 100% !important;
   background: $background !important;
   text-align: center !important;
-  font-size: 20px !important;
   cursor: default !important;
   text-transform: uppercase !important;
   border-radius: 0px !important;
@@ -108,11 +105,8 @@ $cell-size: 33px;
 
 .clue-label {
   position: absolute !important;
-  top: 2px !important;
-  left: 2px !important;
-  font-size: 9px !important;
   color: $blank !important;
-  z-index: -1;
+  user-select: none;
 }
 
 
@@ -216,6 +210,10 @@ $cell-size: 33px;
 
 
 .big-puzzle {
+  .puzzle-holder {
+    padding-top: 0px !important;
+  }
+
   .clues-holder {
     display: inline-flex !important;
     border: 1px solid $blank !important;
@@ -257,7 +255,6 @@ $cell-size: 33px;
 
     > div {
       margin-left: 15px !important;
-      width: unset;
       width: 100% !important;
     }
   }
@@ -289,5 +286,50 @@ $cell-size: 33px;
     border-radius: 10px !important;
     color: $blank !important;
     margin-bottom: 0.75em;
+  }
+}
+
+.weekday {
+  .grid-body {
+    tr > td {
+      width: $cell-size !important;
+    }
+  }
+
+  .cell-input {
+    height: $cell-size !important;
+    font-size: 20px !important;
+  }
+
+  .clue-label {
+    top: 2px !important;
+    left: 2px !important;
+    font-size: 9px !important;
+  }
+}
+
+.sunday {
+  .grid-body {
+    tr > td {
+      width: $cell-size-small !important;
+    }
+  }
+
+  .cell-input {
+    height: $cell-size-small !important;
+    font-size: 18px !important;
+  }
+
+  .clue-label {
+    top: 0px !important;
+    left: 1px !important;
+    font-size: 8px !important;
+    font-weight: 600;
+  }
+}
+
+.big-nav-enabled {
+  .puzzle-holder {
+    padding-top: 20px !important;
   }
 }

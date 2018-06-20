@@ -47,7 +47,7 @@ class PuzzleHolder extends Component {
 
     return (
       <Article primary={true} style={{height: '100%'}}>
-        <NavHeader />
+        <NavHeader name={this.props.title}/>
         {content}
       </Article>
     );
@@ -70,7 +70,8 @@ PuzzleHolder.contextTypes = {
 
 const select = state => ({
   session: state.session,
-  puzzleLoaded: state.puzzle.puzzleLoaded
+  puzzleLoaded: state.puzzle.puzzleLoaded,
+  title: state.puzzle.current.title
 });
 
 export default connect(select)(PuzzleHolder);

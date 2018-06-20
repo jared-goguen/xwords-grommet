@@ -25,7 +25,8 @@ class Puzzle extends React.Component {
 
   updateDimensionState = async () => {
     let sizeClass;
-    if (this.puzzleHolder.current.offsetWidth < 800) {
+    let cutoff = (this.props.dayType === 'sunday') ? 1000 : 800;
+    if (this.puzzleHolder.current.offsetWidth < cutoff) {
       sizeClass = 'small-puzzle'; 
     } else {
       sizeClass = 'big-puzzle'; 
@@ -51,9 +52,13 @@ class Puzzle extends React.Component {
   }
 
   render() {
-    const style = {marginRight: this.state.marginRight}
+    const style = {marginRight: this.state.marginRight};
+    let classes = this.state.sizeClass + ' ' + this.props.dayType;
+    if (this.state.sizeClass === 'big-puzzle' && this.props.navActive) {
+      classes += ' big-nav-enabled';
+    }
     return (
-      <div className={this.state.sizeClass} ref={this.puzzleHolder}>
+      <div className={classes} ref={this.puzzleHolder}>
       
         <div className={'puzzle-holder'}>
 
@@ -99,7 +104,11 @@ Puzzle.contextTypes = {
 };
 
 const select = state => {
-  return { showErrors: state.puzzle.showErrors };
+  return { 
+    showErrors: state.puzzle.showErrors,
+    dayType: state.puzzle.current.dayType,
+    navActive: state.nav.active
+  };
 }
 
 export default connect(select)(Puzzle);
