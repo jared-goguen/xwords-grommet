@@ -11,6 +11,8 @@ $light: #F3F3F3;
 $main: #501EB4;
 $cell-size: 33px;
 $cell-size-small: 29px;
+$accent: #00CCEB;
+$accent-light: #B2F2F4;
 
 
 /*  outside container */
@@ -89,6 +91,11 @@ $cell-size-small: 29px;
 
   &.cell-active {
     background: $adjacent !important;
+  }
+
+  &.cell-complete {
+    background: $accent-light !important;
+    pointer-events: none;
   }
 
   &.cell-error {
@@ -304,9 +311,10 @@ $cell-size-small: 29px;
   }
 
   .clue-label {
-    top: 2px !important;
+    top: 1px !important;
     left: 2px !important;
-    font-size: 9px !important;
+    font-size: 8px !important;
+    font-weight: 500;
   }
 }
 

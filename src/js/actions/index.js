@@ -35,3 +35,4 @@ export const NEXT_CELL = 'NEXT_CELL';
 export const PREVIOUS_CELL = 'PREVIOUS_CELL';
 export const MOVE_CELL = 'MOVE_CELL';
 export const SHOW_ERRORS = 'SHOW_ERRORS';
+export const REVEAL_ALL = 'REVEAL_ALL';

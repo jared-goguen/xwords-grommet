@@ -85,7 +85,8 @@ class Cell extends React.Component {
     if ( this.props.focus === nextProps.focus &&
          this.props.active === nextProps.active &&
          this.props.entry === nextProps.entry &&
-         this.props.showErrors === nextProps.showErrors
+         this.props.showErrors === nextProps.showErrors && 
+         this.props.complete === nextProps.complete
       ) {
       return false;
     }
@@ -137,6 +138,10 @@ class Cell extends React.Component {
       innerClassName += 'cell-error ';
     }
 
+    if (this.props.complete) {
+      innerClassName = 'cell-input cell-complete';
+    }
+
     return (
       <td className={ outerClassName }>
         <div>
@@ -171,7 +176,8 @@ const select = (state, prevProps) => {
     state.puzzle.activeColumn === prevProps.column
   );
   const showErrors = state.puzzle.showErrors;
-  return { focus, showErrors };
+  const complete = state.puzzle.complete;
+  return { focus, showErrors, complete };
 };
 
 export default connect(select)(Cell);

@@ -116,6 +116,19 @@ export const cellUDLR = (entries, row, column, UDLR) => {
   return null;
 };
 
+export const isComplete = (answers, entries) => {
+  let rows = answers.length;
+  let columns = answers[0].length;
+  for (let row = 0; row < rows; row++) {
+    for (let column = 0; column < columns; column++) {
+      if (answers[row][column] !== entries[row][column]) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
+
 
 export const createReducer = (initialState, handlers) => {
   return (state = initialState, action) => {

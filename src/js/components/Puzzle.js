@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { showErrors } from '../actions/puzzle';
+import { showErrors, revealAll } from '../actions/puzzle';
 
+import Button from 'grommet/components/Button';
 import CheckBox from 'grommet/components/CheckBox';
 
 import Grid from './Grid';
@@ -21,6 +22,10 @@ class Puzzle extends React.Component {
 
   setShowErrors = (event) => {
     this.props.dispatch(showErrors(event.target.checked));
+  }
+
+  revealAllAnswers = (event) => {
+    this.props.dispatch(revealAll());
   }
 
   updateDimensionState = async () => {
@@ -76,9 +81,16 @@ class Puzzle extends React.Component {
                 <CheckBox
                   id='show-errors'
                   label='show errors'
-                  named='show-errors'
+                  name='show-errors'
                   toggle={true}
                   onChange={ this.setShowErrors }
+                />
+                <Button
+                  id='reveal-all'
+                  label='reveal all'
+                  name='reveal-all'
+                  accent={true}
+                  onClick={ this.revealAllAnswers }
                 />
               </div>
 

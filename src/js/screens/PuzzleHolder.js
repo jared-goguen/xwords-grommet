@@ -17,6 +17,7 @@ import { loadPuzzle, unloadPuzzle } from '../actions/puzzle';
 class PuzzleHolder extends Component {
   constructor() {
     super();
+    this.state = {complete: false};
   }
 
   componentDidMount() {
@@ -71,7 +72,8 @@ PuzzleHolder.contextTypes = {
 const select = state => ({
   session: state.session,
   puzzleLoaded: state.puzzle.puzzleLoaded,
-  title: state.puzzle.current.title
+  title: state.puzzle.current.title,
+  complete: state.puzzle.complete
 });
 
 export default connect(select)(PuzzleHolder);

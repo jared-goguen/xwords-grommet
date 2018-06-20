@@ -12,7 +12,8 @@ import {
   NEXT_CELL,
   PREVIOUS_CELL,
   MOVE_CELL,
-  SHOW_ERRORS
+  SHOW_ERRORS,
+  REVEAL_ALL
 } from '../actions';
 
 import { 
@@ -20,7 +21,8 @@ import {
   getActiveState, 
   nextOpenCellInClue, 
   previousCellInClue, 
-  cellUDLR 
+  cellUDLR,
+  isComplete
 } from './utils';
 
 
@@ -38,6 +40,7 @@ const initialPuzzleState = {
   entries: undefined,
   puzzleLoaded: false,
   showErrors: false,
+  complete: false
 };
 
 const initialState = {
@@ -70,7 +73,8 @@ const handlers = {
   [SET_ENTRY]: (state, action) => {
     let entries = state.entries.map(row => row.slice());
     entries[action.row][action.column] = action.entry.toUpperCase();
-    return { entries };
+    let complete = isComplete(state.current.answers, entries);
+    return { entries, complete };
   },
 
   [FOCUS_CLUE]: (state, action) => getActiveState(action, state.current.adjacency),
@@ -137,7 +141,12 @@ const handlers = {
     }
   },
 
-  [SHOW_ERRORS]: (state, action) => ({ showErrors: action.enabled })
+  [SHOW_ERRORS]: (state, action) => ({ showErrors: action.enabled }),
+
+  [REVEAL_ALL]: (state, action) => {
+    const entries = state.current.answers.map(row => row.slice());
+    return { entries, complete: true };
+  }
 
 };
 

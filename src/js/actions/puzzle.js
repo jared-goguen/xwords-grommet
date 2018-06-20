@@ -12,7 +12,8 @@ import {
   NEXT_CELL,
   PREVIOUS_CELL,
   MOVE_CELL,
-  SHOW_ERRORS
+  SHOW_ERRORS,
+  REVEAL_ALL
 } from '../actions';
 
 import { getLatest, getPuzzle } from '../api/puzzle';
@@ -79,4 +80,8 @@ export function moveCell(direction) {
 
 export function showErrors(enabled) {
   return { type: SHOW_ERRORS, enabled};
+}
+
+export function revealAll() {
+  return { type: REVEAL_ALL};
 }
