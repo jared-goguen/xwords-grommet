@@ -8,6 +8,7 @@ $error-light: #FFB2C3;
 $error-active: #C498F9;
 $error-highlight: #E0B2FF;
 $light: #F3F3F3;
+$main: #501EB4;
 $cell-size: 33px;
 $cell-size-small: 29px;
 
@@ -154,11 +155,11 @@ $cell-size-small: 29px;
 
 .clue-holder {
   font-size: 11px !important;
-  border-bottom: 1px solid $error !important;
+  border-bottom: 1px solid $main !important;
   padding-bottom: 3px !important;
 
   h3 {
-    border-bottom: 1px solid $error !important;
+    border-bottom: 1px solid $main !important;
     text-align: center !important;
     margin-top: 0 !important;
   }
@@ -216,14 +217,14 @@ $cell-size-small: 29px;
 
   .clues-holder {
     display: inline-flex !important;
-    border: 1px solid $blank !important;
-    padding: 10px !important;
-    border-radius: 10px !important;
+    border: 1px solid $main !important;
+    border-bottom: 0px !important;
     max-width: 30em !important;
     position: absolute !important;
     right: 0 !important;
     left: 65% !important;
     margin-right: 15px !important;
+    margin-left: 15px !important;
   }
 
   .grid-flex {
