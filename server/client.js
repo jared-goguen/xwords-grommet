@@ -1,4 +1,4 @@
-import MongoClient from 'mongodb'; 
+const MongoClient = require('mongodb'); 
 
 let url, dbName;
 
@@ -14,14 +14,14 @@ let clientInstance = null;
 let dbInstance = null;
 let collections = {};
 
-export const getClient = async () => {
+const getClient = async () => {
   if (clientInstance === null) {
     clientInstance = await MongoClient.connect(url)
   }
   return clientInstance;  
 }
 
-export const getDatabase = async () => {
+const getDatabase = async () => {
   if (dbInstance === null) {
     const client = await getClient();
     dbInstance = client.db(dbName);
@@ -29,7 +29,7 @@ export const getDatabase = async () => {
   return dbInstance;  
 }
 
-export const getCollection = async (name) => {
+const getCollection = async (name) => {
   const db = await getDatabase();
   let collection = collections[name];
   if (collection === undefined) {
@@ -38,4 +38,8 @@ export const getCollection = async (name) => {
   return collection; 
 }
 
-
+module.exports = {
+  getClient,
+  getDatabase,
+  getCollection
+};

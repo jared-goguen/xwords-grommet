@@ -1,7 +1,8 @@
-import fetch from 'node-fetch';
-import fs from 'fs-extra';
-import xml2js from 'xml2js';
-import { getCollection } from './client';
+const fetch = require('node-fetch');
+const fs = require('fs-extra');
+const xml2js = require('xml2js');
+const getCollection = require('./client').getCollection;
+
 
 const parseXMLString = (xml) => new Promise((resolve, reject) => {
   xml2js.parseString(xml, (err, result) => {
@@ -40,21 +41,37 @@ const savePuzzle = async (path) => {
   collection.insert(transformDB(path, puzzle));
 };
 
-const _updatePuzzles = async (date) => {
-  const qDate = qualifyDate(date);
-  const qPath = qualifyPath(qDate);
+const updatePuzzles = async (date) => {
+  date = date || new Date();
 
-  try {
-    await fs.stat(`${qPath}.json`);
-  } catch (err) {
-    await savePuzzle(qDate);
-    date.setDate(date.getDate() - 1);
-    _updatePuzzles(date);
+  let qDate, qPath;
+  let maxPuzzles = 7;
+  let qDates = [];
+
+  do {
+    qDate = qualifyDate(date);
+    qPath = qualifyPath(qDate);  
+
+    try {
+      await fs.stat(`${qPath}.json`);
+    } catch (err) {
+      qDates.push(qDate);
+      date.setDate(date.getDate() - 1);
+    }
+
+    maxPuzzles--;
+  } while (maxPuzzles);
+
+  for (let qDate of qDates) {  
+    try {
+      await savePuzzle(qDate);
+      console.log(`fetched puzzle for ${qDate}`);
+    } catch (err) {
+      console.log(`unable to fetch puzzle for ${qDate}`);
+    }
   }
-};
-
-export const updatePuzzles = () => {
-  _updatePuzzles(new Date());
+  
+  return true;
 };
 
 const transformDB = (path, data) => {
@@ -110,6 +127,11 @@ const loadFile = (transform) => async (file) => {
 };
 
 const populatePuzzleDatabase = async () => {
+  try {
+    await updatePuzzles();
+  } catch (err) {
+    console.log('failed to update puzzles');
+  }
   const collection = await getCollection('puzzles');
   let reset = collection.remove({});
 
@@ -139,7 +161,7 @@ const entryCompare = (entryA, entryB) => {
   return dateB - dateA;
 };
 
-export const latestPuzzles = async (count) => {
+const latestPuzzles = async (count) => {
   const collection = await getCollection('puzzles');
   const entries = await collection.find({}).toArray();
   entries.sort(entryCompare);
@@ -147,7 +169,7 @@ export const latestPuzzles = async (count) => {
   return recent.map(displayEntry);
 };
 
-export const getPuzzle = (path) => {
+const getPuzzle = (path) => {
   return new Promise(async (resolve, reject) => {
     const collection = await getCollection('puzzles');
     let result = await collection.find({path}).toArray();
@@ -158,4 +180,8 @@ export const getPuzzle = (path) => {
   });
 };
 
-populatePuzzleDatabase();
+module.exports = {
+  populatePuzzleDatabase,
+  latestPuzzles,
+  getPuzzle
+};
